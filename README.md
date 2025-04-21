@@ -1,0 +1,1 @@
+# yarn-plugin-static-ast-grep
