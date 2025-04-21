@@ -1,0 +1,28 @@
+{
+  "name": "@electricui/yarn-plugin-static-ast-grep",
+  "version": "0.1.0",
+  "author": "Electric UI <support@electricui.com> (https://electricui.com)",
+  "main": "./sources/index.ts",
+  "dependencies": {
+    "@types/node": "^18.0.0",
+    "@yarnpkg/builder": "^4.0.0",
+    "@yarnpkg/core": "^4.0.2",
+    "@yarnpkg/fslib": "^3.0.1",
+    "@yarnpkg/libzip": "^3.0.0",
+    "typescript": "5.8.3",
+    "detect-libc": "2.0.3"
+  },
+  "scripts": {
+    "build": "builder build plugin"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-arca": "^0.9.0",
+    "eslint-plugin-react": "^7.20.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/electricui/yarn-static-node-gyp-build.git"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}
