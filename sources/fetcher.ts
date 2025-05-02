@@ -85,9 +85,10 @@ export class StaticASTGrepFetcher implements Fetcher {
     await generatedPackage.writeJsonPromise(`package.json` as Filename, {
       name: structUtils.slugifyLocator(locator),
       // Set up the bin
+      // Point directly at the .exe on windows
       bin: {
-        sg: 'sg',
-        'ast-grep': 'ast-grep',
+        sg: process.platform === 'win32' ? 'sg.exe' : 'sg',
+        'ast-grep': process.platform === 'win32' ? 'ast-grep.exe' : 'ast-grep',
       },
       preferUnplugged: true, // Tell yarn to unplug the @ast-grep/cli replacement package
     })

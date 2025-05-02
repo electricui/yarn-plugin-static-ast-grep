@@ -8,6 +8,7 @@ import {
   Resolver,
   structUtils,
 } from '@yarnpkg/core'
+import { PortablePath } from '@yarnpkg/fslib'
 
 export class StaticASTGrepResolver implements Resolver {
   supportsDescriptor(descriptor: Descriptor, opts: MinimalResolveOptions) {
@@ -65,6 +66,15 @@ export class StaticASTGrepResolver implements Resolver {
     // Resolve the _real_ package, and pass through those dependencies
     const original = await opts.resolver.resolve(structUtils.parseLocator(`@ast-grep/cli@${originalVersion}`), opts)
 
+    const bin = new Map(original.bin.entries())
+
+    // On windows, rewrite the bin entries to be .exe
+    if (process.platform === 'win32') {
+      for (const [key, path] of bin.entries()) {
+        bin.set(key, `${path}.exe` as PortablePath)
+      }
+    }
+
     return {
       ...locator,
 
@@ -80,7 +90,7 @@ export class StaticASTGrepResolver implements Resolver {
       dependenciesMeta: original.dependenciesMeta,
       peerDependenciesMeta: original.peerDependenciesMeta,
 
-      bin: original.bin,
+      bin,
     }
   }
 }
